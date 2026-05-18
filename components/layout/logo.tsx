@@ -20,7 +20,7 @@ export function Logo() {
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src="/headshot.jpg"
+            src="/headshot.webp"
             alt="Sean Corey"
             className="w-full h-full object-cover object-[center_15%]"
             onError={() => setImgError(true)}

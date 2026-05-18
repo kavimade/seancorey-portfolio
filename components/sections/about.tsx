@@ -152,7 +152,7 @@ export function About() {
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/headshot.jpg"
+                src="/headshot.webp"
                 alt="Sean Corey"
                 className="absolute inset-0 w-full h-full object-cover object-top"
               />

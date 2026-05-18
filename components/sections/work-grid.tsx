@@ -46,10 +46,10 @@ function WorkCard({
       )}
 
       <div className="p-7 sm:p-8">
-        <p className="font-display font-bold text-white text-[1.2rem] sm:text-[1.4rem] leading-tight mb-2">
+        <p className="font-display font-bold text-white text-[1.45rem] leading-tight mb-2">
           {project.title}
         </p>
-        <p className="font-sans text-[0.95rem] sm:text-[1rem] text-white/55 leading-relaxed mb-5">
+        <p className="font-sans text-[1.1rem] text-white/55 leading-relaxed mb-5">
           {project.description}
         </p>
         <button
