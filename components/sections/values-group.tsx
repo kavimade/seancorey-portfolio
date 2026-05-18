@@ -20,8 +20,10 @@ export function DarkTransitionGroup() {
         const contentEl = workEl.querySelector<HTMLElement>(":scope > div");
         if (contentEl) contentEl.style.opacity = "";
       }
-      const valuesEl = document.getElementById("values") as HTMLElement | null;
-      if (valuesEl) valuesEl.style.backgroundColor = "";
+      const processEl = document.getElementById("process") as HTMLElement | null;
+      if (processEl) processEl.style.backgroundColor = "";
+      const resultsEl = document.getElementById("results") as HTMLElement | null;
+      if (resultsEl) resultsEl.style.backgroundColor = "";
     };
   }, []);
 
@@ -47,8 +49,10 @@ export function DarkTransitionGroup() {
       const contentEl = workEl.querySelector<HTMLElement>(":scope > div");
       if (contentEl) contentEl.style.opacity = String(1 - t);
     }
-    const valuesEl = document.getElementById("values") as HTMLElement | null;
-    if (valuesEl) valuesEl.style.backgroundColor = color;
+    const processEl = document.getElementById("process") as HTMLElement | null;
+    if (processEl) processEl.style.backgroundColor = color;
+    const resultsEl = document.getElementById("results") as HTMLElement | null;
+    if (resultsEl) resultsEl.style.backgroundColor = color;
   }, [divBg]);
 
   useMotionValueEvent(scrollY, "change", update);
@@ -61,7 +65,7 @@ export function DarkTransitionGroup() {
   }, [update, scrollY]);
 
   return (
-    <div ref={ref} id="values-transition">
+    <div ref={ref} id="process-transition">
       <motion.div
         data-section-theme="dark"
         className="h-[65vh] sm:h-[42vh]"

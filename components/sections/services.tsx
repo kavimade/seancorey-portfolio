@@ -32,7 +32,7 @@ const principles = [
 export function Services() {
   return (
     <section
-      id="values"
+      id="process"
       data-section-theme="light"
       className="bg-forest pt-12 pb-16 sm:pt-16 sm:pb-24 lg:pt-[calc(var(--spacing)*22)] lg:pb-36"
     >
@@ -48,7 +48,7 @@ export function Services() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="font-display font-bold text-[clamp(2.25rem,5vw,4.5rem)] text-forest leading-tight mb-8"
             >
-              My Values
+              My Process
             </motion.h2>
 
             <motion.p
@@ -74,8 +74,8 @@ export function Services() {
                 transition={{ duration: 0.7, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 className="flex gap-6"
               >
-                <div className="w-[46px] h-[46px] sm:w-[54px] sm:h-[54px] rounded-full bg-forest flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="font-display font-bold text-[1.25rem] sm:text-[1.45rem] text-sage">
+                <div className="w-[43px] h-[43px] sm:w-[50px] sm:h-[50px] rounded-full bg-forest flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="font-display font-bold text-[1.15rem] sm:text-[1.35rem] text-sage">
                     {p.number}
                   </span>
                 </div>

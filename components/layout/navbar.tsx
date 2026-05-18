@@ -64,14 +64,14 @@ export function Navbar() {
       return;
     }
 
-    const transitionEl = document.getElementById("values-transition");
-    const valuesEl     = document.getElementById("values");
-    if (transitionEl && valuesEl) {
-      const groupTop  = transitionEl.getBoundingClientRect().top + y;
-      const valuesTop = valuesEl.getBoundingClientRect().top + y;
-      const fadeRange = vh * FADE_THRESHOLD;
-      const fadeStart = groupTop - fadeRange;
-      if (y >= fadeStart && y < valuesTop) {
+    const transitionEl = document.getElementById("process-transition");
+    const processEl    = document.getElementById("process");
+    if (transitionEl && processEl) {
+      const groupTop   = transitionEl.getBoundingClientRect().top + y;
+      const processTop = processEl.getBoundingClientRect().top + y;
+      const fadeRange  = vh * FADE_THRESHOLD;
+      const fadeStart  = groupTop - fadeRange;
+      if (y >= fadeStart && y < processTop) {
         const t = Math.min(1, Math.max(0, (y - fadeStart) / fadeRange));
         navBg.set(`rgb(${lerp(FOREST[0],SAGE[0],t)},${lerp(FOREST[1],SAGE[1],t)},${lerp(FOREST[2],SAGE[2],t)})`);
         navColor.set(`rgb(${lerp(WHITE[0],FOREST[0],t)},${lerp(WHITE[1],FOREST[1],t)},${lerp(WHITE[2],FOREST[2],t)})`);
@@ -131,7 +131,7 @@ export function Navbar() {
           maskImage: "linear-gradient(to bottom, black 0%, black 25%, transparent 85%)",
           WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 25%, transparent 85%)",
         }}
-        className="fixed top-[72px] left-0 right-0 h-12 sm:h-24 pointer-events-none z-[1]"
+        className="fixed top-[72px] left-0 right-0 h-12 sm:h-24 pointer-events-none z-40"
       />
 
       <motion.header
