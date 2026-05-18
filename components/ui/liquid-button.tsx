@@ -10,7 +10,9 @@ const fillVariants = {
 
 const fillTransition = { duration: 0.65, ease: [0.12, 1, 0.25, 1] as const };
 
-interface LiquidButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type OmitDrag<T> = Omit<T, "onDrag" | "onDragEnd" | "onDragStart" | "onDragEnter" | "onDragLeave" | "onDragOver" | "onDragCapture" | "onDragEndCapture" | "onDragEnterCapture" | "onDragLeaveCapture" | "onDragOverCapture" | "onDragStartCapture">;
+
+interface LiquidButtonProps extends OmitDrag<React.ButtonHTMLAttributes<HTMLButtonElement>> {
   fillColor: string;
 }
 
@@ -34,7 +36,7 @@ export function LiquidButton({ fillColor, className, children, ...props }: Liqui
   );
 }
 
-interface LiquidAnchorProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface LiquidAnchorProps extends OmitDrag<React.AnchorHTMLAttributes<HTMLAnchorElement>> {
   fillColor: string;
 }
 
