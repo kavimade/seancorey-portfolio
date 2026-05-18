@@ -74,8 +74,8 @@ export function Services() {
                 transition={{ duration: 0.7, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 className="flex gap-6"
               >
-                <div className="w-[60px] h-[60px] rounded-full bg-forest flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="font-display font-bold text-[1.6rem] text-sage">
+                <div className="w-[46px] h-[46px] sm:w-[54px] sm:h-[54px] rounded-full bg-forest flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="font-display font-bold text-[1.25rem] sm:text-[1.45rem] text-sage">
                     {p.number}
                   </span>
                 </div>

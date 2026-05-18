@@ -10,6 +10,7 @@ import { Logo } from "@/components/layout/logo";
 import { Hamburger, MobileNav } from "@/components/layout/mobile-nav";
 import { getCssColorRgb, COLOR_VARS } from "@/lib/palette";
 import { StyleSwitcher } from "@/components/ui/style-switcher";
+import { LiquidButton } from "@/components/ui/liquid-button";
 
 const NAV_HEIGHT = 72;
 
@@ -161,18 +162,19 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center gap-3">
             {mounted && <StyleSwitcher />}
-            <button
+            <LiquidButton
               onClick={() => scrollToSection("contact")}
+              fillColor={navIsDark ? "color-mix(in srgb, white 10%, transparent)" : "color-mix(in srgb, var(--color-forest) 78%, white)"}
               className={cn(
                 buttonVariants({ size: "sm" }),
-                "rounded-full px-5 text-sm transition-all duration-300 shadow-none cursor-pointer",
+                "rounded-full h-9 px-5 text-sm transition-all duration-300 shadow-none cursor-pointer",
                 navIsDark
-                  ? "border border-white/30 bg-transparent text-white hover:bg-white/10"
-                  : "bg-forest hover:bg-forest/85 text-white"
+                  ? "border border-white/30 bg-transparent text-white"
+                  : "bg-forest text-white"
               )}
             >
               Work with me
-            </button>
+            </LiquidButton>
           </div>
 
           <div className="flex md:hidden items-center gap-0.5">

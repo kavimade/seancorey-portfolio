@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { buttonVariants } from "@/components/ui/button";
+import { LiquidButton, LiquidAnchor } from "@/components/ui/liquid-button";
 import { ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { scrollToSection } from "@/lib/nav";
@@ -43,10 +44,7 @@ export function Hero() {
             className="mb-10 max-w-[740px]"
           >
             <p className="text-[1.4rem] sm:text-[1.5rem] text-forest leading-relaxed font-sans">
-              I bring 20 years of craft and judgment to every project, combining{" "}
-              <strong className="font-semibold">human insight</strong> with an{" "}
-              <strong className="font-semibold">AI-powered workflow</strong>{" "}
-              to deliver something that&apos;s fast, thoughtful, and distinctly yours.
+              I bring 20 years of craft and judgment to every project. I combine <strong className="font-semibold">human insight</strong> with an <strong className="font-semibold">AI-powered workflow</strong>... so the work is fast, thoughtful, and distinctly yours.
             </p>
           </motion.div>
 
@@ -56,26 +54,27 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.72, ease: "easeOut" }}
             className="flex items-center gap-3"
           >
-            {/* Down arrow + smooth scroll — works reliably on repeat clicks */}
-            <a
+            <LiquidAnchor
               href="/#work"
-              onClick={(e) => scrollToSection("work", e)}
+              onClick={(e) => scrollToSection("work", e as React.MouseEvent<HTMLAnchorElement>)}
+              fillColor="color-mix(in srgb, var(--color-forest) 78%, white)"
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "flex-1 sm:flex-none justify-center bg-forest hover:bg-forest/85 text-white rounded-full px-6 sm:px-8 gap-2 transition-colors duration-300 shadow-none cursor-pointer"
+                "flex-1 sm:flex-none justify-center bg-forest text-white rounded-full h-11 px-7 gap-2 shadow-none cursor-pointer"
               )}
             >
               View my work <ArrowDown size={16} />
-            </a>
-            <button
+            </LiquidAnchor>
+            <LiquidButton
               onClick={() => scrollToSection("contact")}
+              fillColor="color-mix(in srgb, var(--color-forest) 8%, transparent)"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "flex-1 sm:flex-none justify-center rounded-full px-6 sm:px-8 border-forest/30 text-forest hover:bg-forest/8 shadow-none transition-colors duration-300 cursor-pointer"
+                "flex-1 sm:flex-none justify-center rounded-full h-11 px-7 border-forest/30 text-forest shadow-none cursor-pointer"
               )}
             >
               Get in touch
-            </button>
+            </LiquidButton>
           </motion.div>
 
         </div>

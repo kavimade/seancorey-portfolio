@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import { LiquidButton } from "@/components/ui/liquid-button";
 import { ContactModal } from "@/components/ui/contact-modal";
 
 export function Cta() {
@@ -15,7 +16,7 @@ export function Cta() {
         data-section-theme="dark"
         className="bg-forest py-28 lg:py-40"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -23,7 +24,7 @@ export function Cta() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="font-display font-bold text-[clamp(2.25rem,5vw,4.5rem)] text-white leading-[1.1] mb-8 max-w-3xl mx-auto"
           >
-            Ready to make something great?
+            Have a project worth getting right?
           </motion.h2>
 
           <motion.p
@@ -31,7 +32,7 @@ export function Cta() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[1.5rem] text-white/70 leading-relaxed font-sans max-w-2xl mx-auto mb-12"
+            className="text-[1.4rem] sm:text-[1.5rem] text-white/70 leading-relaxed font-sans max-w-2xl mx-auto mb-12 px-4 sm:px-0"
           >
             If you&apos;re working on something meaningful and want a thoughtful partner
             who understands both the technical and human side of building digital
@@ -44,12 +45,13 @@ export function Cta() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <button
+            <LiquidButton
               onClick={() => setModalOpen(true)}
-              className="inline-flex items-center gap-2 bg-sage hover:bg-sage/85 text-forest rounded-full px-10 h-12 text-base font-sans shadow-none transition-colors duration-300 cursor-pointer"
+              fillColor="color-mix(in srgb, var(--color-sage) 82%, var(--color-forest))"
+              className="inline-flex items-center gap-2 bg-sage text-forest rounded-full px-10 h-12 text-base font-sans shadow-none cursor-pointer"
             >
               Let&apos;s work together <ArrowRight size={16} />
-            </button>
+            </LiquidButton>
           </motion.div>
         </div>
       </section>
