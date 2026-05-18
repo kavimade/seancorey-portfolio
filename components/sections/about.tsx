@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion, useMotionValue, useAnimationFrame } from "motion/react";
+import { useRef, useEffect, useState, useCallback } from "react";
+import { motion, useMotionValue, useAnimationFrame, AnimatePresence } from "motion/react";
 
 const MARQUEE_ITEMS = [
   "Web Designer", "AI Strategist", "Yoga Teacher",
@@ -80,7 +80,7 @@ const eras = [
   {
     label: "Today",
     body: [
-      "Today I combine both sides: technical expertise and contemplative practice. I work with mission-driven brands who want thoughtful digital presence enhanced by AI, not dominated by it.",
+      "Today I combine both sides: technical expertise and contemplative practice. I work with mission-driven brands who want a thoughtful digital presence enhanced by AI, not dominated by it.",
       "I take on select projects each year. I teach yoga and meditation on Insight Timer, and currently live in Hoi An, Vietnam, working with clients worldwide.",
       "If you're building something that matters, I'd love to help.",
     ],
@@ -94,13 +94,58 @@ const stats = [
   { value: "13+", unit: "", label: "Years of yoga" },
 ];
 
+type Particle = { id: number; x: number; y: number; dx: number; dy: number; opacity: number };
+let _pid = 0;
+
 export function About() {
+  const sectionRef  = useRef<HTMLElement>(null);
+  const [particles, setParticles] = useState<Particle[]>([]);
+
+  const handleStatClick = useCallback((e: React.MouseEvent) => {
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const count = 4 + Math.floor(Math.random() * 3);
+    const spawned: Particle[] = Array.from({ length: count }, () => {
+      const angle = Math.random() * Math.PI * 2;
+      const isMobile = window.innerWidth < 640;
+      const dist  = isMobile ? 80 + Math.random() * 100 : 180 + Math.random() * 260;
+      return { id: _pid++, x, y, dx: Math.cos(angle) * dist, dy: Math.sin(angle) * dist, opacity: 0.35 + Math.random() * 0.55 };
+    });
+    setParticles(prev => [...prev, ...spawned]);
+  }, []);
+
+  const removeParticle = useCallback((id: number) => {
+    setParticles(prev => prev.filter(p => p.id !== id));
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="about"
       data-section-theme="light"
       className="bg-sage overflow-hidden relative z-10 -mt-[16vh] sm:-mt-[20vh]"
     >
+      {/* Easter egg particles */}
+      <AnimatePresence>
+        {particles.map(p => (
+          <motion.span
+            key={p.id}
+            aria-hidden
+            initial={{ opacity: p.opacity, x: p.x, y: p.y }}
+            animate={{ opacity: 0,         x: p.x + p.dx, y: p.y + p.dy }}
+            exit={{}}
+            transition={{ duration: 1.0, ease: "easeOut" }}
+            onAnimationComplete={() => removeParticle(p.id)}
+            className="absolute top-0 left-0 pointer-events-none select-none text-[2.8rem] sm:text-[3.5rem] font-bold"
+            style={{ color: "color-mix(in srgb, var(--color-forest) 35%, transparent)" }}
+          >
+            ✺
+          </motion.span>
+        ))}
+      </AnimatePresence>
+
       {/* Marquee */}
       <div className="pt-8 sm:pt-10 pb-16 sm:pb-24">
         <MarqueeRow />
@@ -190,11 +235,13 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              onClick={handleStatClick}
+              className="cursor-pointer"
             >
-              <p className="font-display font-bold text-[2.5rem] sm:text-[3rem] text-forest leading-none">
+              <p className="font-display font-bold text-[2.5rem] sm:text-[3rem] text-forest leading-none select-none">
                 {value}<span className="text-[1.1rem] font-semibold ml-0.5">{unit}</span>
               </p>
-              <p className="font-sans text-[0.75rem] tracking-[0.15em] uppercase text-forest mt-2">
+              <p className="font-sans text-[0.75rem] tracking-[0.15em] uppercase text-forest mt-2 select-none">
                 {label}
               </p>
             </motion.div>
