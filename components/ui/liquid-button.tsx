@@ -10,51 +10,61 @@ const fillVariants = {
 
 const fillTransition = { duration: 0.65, ease: [0.12, 1, 0.25, 1] as const };
 
-type OmitDrag<T> = Omit<T, "onDrag" | "onDragEnd" | "onDragStart" | "onDragEnter" | "onDragLeave" | "onDragOver" | "onDragCapture" | "onDragEndCapture" | "onDragEnterCapture" | "onDragLeaveCapture" | "onDragOverCapture" | "onDragStartCapture">;
-
-interface LiquidButtonProps extends OmitDrag<React.ButtonHTMLAttributes<HTMLButtonElement>> {
-  fillColor: string;
+function Fill({ fillColor }: { fillColor: string }) {
+  return (
+    <motion.span
+      aria-hidden
+      className="absolute inset-0 pointer-events-none"
+      style={{ background: fillColor, transformOrigin: "left" }}
+      variants={fillVariants}
+      transition={fillTransition}
+    />
+  );
 }
 
-export function LiquidButton({ fillColor, className, children, ...props }: LiquidButtonProps) {
+interface LiquidButtonProps {
+  fillColor: string;
+  className?: string;
+  children?: React.ReactNode;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+}
+
+export function LiquidButton({ fillColor, className, children, onClick, type, disabled }: LiquidButtonProps) {
   return (
     <motion.button
       initial="rest"
       whileHover="hover"
       className={cn("relative overflow-hidden", className)}
-      {...props}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
     >
-      <motion.span
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: fillColor, transformOrigin: "left" }}
-        variants={fillVariants}
-        transition={fillTransition}
-      />
+      <Fill fillColor={fillColor} />
       <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
     </motion.button>
   );
 }
 
-interface LiquidAnchorProps extends OmitDrag<React.AnchorHTMLAttributes<HTMLAnchorElement>> {
+interface LiquidAnchorProps {
   fillColor: string;
+  className?: string;
+  children?: React.ReactNode;
+  href?: string;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
-export function LiquidAnchor({ fillColor, className, children, ...props }: LiquidAnchorProps) {
+export function LiquidAnchor({ fillColor, className, children, href, onClick }: LiquidAnchorProps) {
   return (
     <motion.a
       initial="rest"
       whileHover="hover"
       className={cn("relative overflow-hidden", className)}
-      {...props}
+      href={href}
+      onClick={onClick}
     >
-      <motion.span
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: fillColor, transformOrigin: "left" }}
-        variants={fillVariants}
-        transition={fillTransition}
-      />
+      <Fill fillColor={fillColor} />
       <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
     </motion.a>
   );
