@@ -22,6 +22,8 @@ export function Logo() {
           <img
             src="/headshot.webp"
             alt="Sean Corey"
+            width={1600}
+            height={1600}
             className="w-full h-full object-cover object-[center_15%]"
             onError={() => setImgError(true)}
           />

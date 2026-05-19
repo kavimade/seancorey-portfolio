@@ -182,6 +182,35 @@
   ::selection {
     background-color: oklch(0.61 0.062 198 / 20%);
   }
+
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 10000;
+    padding: 0.5rem 1rem;
+    background: var(--color-forest);
+    color: var(--color-sage);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0 0 0.5rem 0.5rem;
+    text-decoration: none;
+    transition: top 0.2s;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ── Forest / Sage explicit utilities ───────────────────────────────────────
@@ -193,6 +222,19 @@
    to applyScheme() at runtime — colour-mix() handles opacity modifiers.
    ─────────────────────────────────────────────────────────────────────────── */
 @layer utilities {
+  /* ── Accessibility ── */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   /* ── Backgrounds ── */
   .bg-forest     { background-color: var(--color-forest); }
   .bg-sage       { background-color: var(--color-sage); }

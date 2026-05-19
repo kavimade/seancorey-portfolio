@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ArrowRight } from "lucide-react";
 
@@ -47,13 +47,19 @@ export function ContactModal({
   const [submitError, setSubmitError] = useState("");
   const [sending, setSending]   = useState(false);
   const [sent, setSent]         = useState(false);
-  const loadTime = useRef<number>(0);
+  const loadTime  = useRef<number>(0);
+  const closeRef  = useRef<HTMLButtonElement>(null);
+  const firstFieldRef = useRef<HTMLInputElement>(null);
 
-  // Lock scroll; record load time when modal opens; reset on close
+  // Lock scroll; record load time; focus management on open/close
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
-    if (isOpen) loadTime.current = Date.now();
-    if (!isOpen) {
+    if (isOpen) {
+      loadTime.current = Date.now();
+      // Move focus into the modal after animation starts
+      const t = setTimeout(() => firstFieldRef.current?.focus(), 50);
+      return () => clearTimeout(t);
+    } else {
       const t = setTimeout(() => {
         setForm({ name: "", email: "", projectType: "", message: "", honeypot: "" });
         setFieldErrors({});
@@ -118,13 +124,17 @@ export function ContactModal({
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1.04 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="contact-modal-title"
           className="fixed inset-0 z-[200] bg-sage flex items-start sm:items-center justify-center px-6 py-10 sm:py-20 overflow-y-auto"
         >
           {/* Close */}
           <button
+            ref={closeRef}
             onClick={onClose}
             className="absolute top-6 right-6 w-10 h-10 rounded-full bg-forest/8 hover:bg-forest/15 flex items-center justify-center text-forest transition-colors duration-200 cursor-pointer"
-            aria-label="Close"
+            aria-label="Close contact form"
           >
             <X size={18} />
           </button>
@@ -140,6 +150,7 @@ export function ContactModal({
                   transition={{ duration: 0.2 }}
                 >
                   <motion.h2
+                    id="contact-modal-title"
                     initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
@@ -184,14 +195,17 @@ export function ContactModal({
                       </label>
                       <input
                         id="cf-name"
+                        ref={firstFieldRef}
                         type="text"
                         autoComplete="name"
                         value={form.name}
                         onChange={set("name")}
+                        aria-invalid={!!fieldErrors.name}
+                        aria-describedby={fieldErrors.name ? "cf-name-error" : undefined}
                         className={fieldErrors.name ? inputError : inputNormal}
                       />
                       {fieldErrors.name && (
-                        <p className="mt-2 text-xs font-sans text-red-500/75">{fieldErrors.name}</p>
+                        <p id="cf-name-error" role="alert" className="mt-2 text-xs font-sans text-red-500/75">{fieldErrors.name}</p>
                       )}
                     </motion.div>
 
@@ -213,10 +227,12 @@ export function ContactModal({
                         autoComplete="email"
                         value={form.email}
                         onChange={set("email")}
+                        aria-invalid={!!fieldErrors.email}
+                        aria-describedby={fieldErrors.email ? "cf-email-error" : undefined}
                         className={fieldErrors.email ? inputError : inputNormal}
                       />
                       {fieldErrors.email && (
-                        <p className="mt-2 text-xs font-sans text-red-500/75">{fieldErrors.email}</p>
+                        <p id="cf-email-error" role="alert" className="mt-2 text-xs font-sans text-red-500/75">{fieldErrors.email}</p>
                       )}
                     </motion.div>
 
@@ -271,10 +287,12 @@ export function ContactModal({
                         rows={4}
                         value={form.message}
                         onChange={set("message")}
+                        aria-invalid={!!fieldErrors.message}
+                        aria-describedby={fieldErrors.message ? "cf-message-error" : undefined}
                         className={`resize-none ${fieldErrors.message ? inputError : inputNormal}`}
                       />
                       {fieldErrors.message && (
-                        <p className="mt-2 text-xs font-sans text-red-500/75">{fieldErrors.message}</p>
+                        <p id="cf-message-error" role="alert" className="mt-2 text-xs font-sans text-red-500/75">{fieldErrors.message}</p>
                       )}
                     </motion.div>
 
@@ -295,9 +313,9 @@ export function ContactModal({
                           {!sending && <ArrowRight size={15} />}
                         </button>
                       </div>
-                      {submitError && (
-                        <p className="text-sm font-sans text-forest/60">{submitError}</p>
-                      )}
+                      <p role="alert" aria-live="assertive" className="text-sm font-sans text-forest/60">
+                        {submitError}
+                      </p>
                     </motion.div>
                   </form>
                 </motion.div>

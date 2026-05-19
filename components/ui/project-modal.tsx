@@ -1,10 +1,30 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useId } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "motion/react";
 import { X, ChevronLeft, ChevronRight, ArrowUpRight, ArrowLeft, ArrowRight, Maximize2 } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import type { Project } from "@/lib/projects";
+
+function renderText(text: string, links?: { word: string; href: string }[]) {
+  if (!links?.length) return text;
+  const pattern = new RegExp(`(${links.map(l => l.word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`, "g");
+  const parts = text.split(pattern);
+  return parts.map((part, i) => {
+    const link = links.find(l => l.word === part);
+    return link ? (
+      <a
+        key={i}
+        href={link.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline underline-offset-2 hover:opacity-70 transition-opacity duration-200"
+      >
+        {part}<span className="sr-only"> (opens in new tab)</span>
+      </a>
+    ) : part;
+  });
+}
 
 interface ProjectModalProps {
   project: Project | null;
@@ -17,7 +37,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
   const [selectedIndex, setSelectedIndex]               = useState(0);
   const [lightboxIndex, setLightboxIndex]               = useState<number | null>(null);
   const [lightboxCurrentIndex, setLightboxCurrentIndex] = useState(0);
-  const modalRef = useRef<HTMLDivElement>(null);
+  const modalRef   = useRef<HTMLDivElement>(null);
+  const closeRef   = useRef<HTMLButtonElement>(null);
+  const titleId    = useId();
 
   const images      = project?.images ?? [];
   const hasMultiple = images.length > 1;
@@ -82,6 +104,10 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   useEffect(() => {
     document.body.style.overflow = project ? "hidden" : "";
+    if (project) {
+      const t = setTimeout(() => closeRef.current?.focus(), 50);
+      return () => clearTimeout(t);
+    }
     return () => { document.body.style.overflow = ""; };
   }, [project]);
 
@@ -140,13 +166,17 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.04 }}
             transition={{ duration: 0.45, ease: EASE }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
             className="fixed top-0 left-0 right-0 h-dvh z-[200] bg-sage overflow-y-auto"
           >
             {/* Close */}
             <button
+              ref={closeRef}
               onClick={onClose}
               className="fixed top-6 right-6 z-10 w-10 h-10 rounded-full bg-forest/8 hover:bg-forest/15 flex items-center justify-center text-forest transition-colors duration-200 cursor-pointer"
-              aria-label="Close"
+              aria-label="Close project"
             >
               <X size={18} />
             </button>
@@ -154,6 +184,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             {/* Header */}
             <div className="max-w-5xl mx-auto px-6 lg:px-12 pt-20 pb-4 sm:pb-12">
               <motion.h2
+                id={titleId}
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
@@ -181,7 +212,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   transition={{ duration: 0.6, delay: 0.26, ease: EASE }}
                   className="hidden sm:inline-flex items-center gap-2 bg-forest hover:bg-forest/85 text-white rounded-full px-7 h-11 text-sm font-sans transition-colors duration-300"
                 >
-                  Visit Website <ArrowUpRight size={15} />
+                  Visit Website <ArrowUpRight size={15} aria-hidden="true" /><span className="sr-only">(opens in new tab)</span>
                 </motion.a>
               )}
             </div>
@@ -203,24 +234,27 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             {images.length > 0 && (
               <div className="sm:hidden px-6 space-y-5">
                 {images.map((src, i) => (
-                  <motion.div
+                  <motion.button
                     key={i}
                     initial={{ opacity: 0, y: 28 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.28 + i * 0.1, ease: EASE }}
-                    className="overflow-hidden rounded-xl relative cursor-zoom-in active:opacity-90 transition-opacity duration-150"
+                    className="overflow-hidden rounded-xl relative cursor-zoom-in active:opacity-90 transition-opacity duration-150 w-full text-left"
                     onClick={() => setLightboxIndex(i)}
+                    aria-label={`View ${project.title} image ${i + 1} fullscreen`}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={src}
-                      alt={`${project.title} — ${i + 1}`}
+                      alt={`${project.title} — image ${i + 1}`}
+                      width={2432}
+                      height={1368}
                       className="w-full block"
                     />
                     <div className="absolute bottom-2.5 right-2.5 w-7 h-7 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center pointer-events-none">
                       <Maximize2 size={13} className="text-white" />
                     </div>
-                  </motion.div>
+                  </motion.button>
                 ))}
               </div>
             )}
@@ -249,6 +283,8 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                             <img
                               src={src}
                               alt={`${project.title} — ${i + 1}`}
+                              width={2432}
+                              height={1368}
                               className="w-full block"
                             />
                           </div>
@@ -317,7 +353,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                             </h3>
                           )}
                           <p className="font-sans text-[1.1rem] text-forest/70 leading-relaxed">
-                            {block.text}
+                            {renderText(block.text, block.links)}
                           </p>
                         </motion.div>
                       ))}
@@ -340,7 +376,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                       transition={{ duration: 0.6, ease: EASE }}
                       className="sm:hidden inline-flex items-center gap-2 mt-10 bg-forest hover:bg-forest/85 text-white rounded-full px-7 h-11 text-sm font-sans transition-colors duration-300"
                     >
-                      Visit Website <ArrowUpRight size={15} />
+                      Visit Website <ArrowUpRight size={15} aria-hidden="true" /><span className="sr-only">(opens in new tab)</span>
                     </motion.a>
                   )}
                 </div>
@@ -394,7 +430,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             <button
               onClick={() => setLightboxIndex(null)}
               className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/12 hover:bg-white/22 flex items-center justify-center text-white transition-colors duration-200 cursor-pointer z-10"
-              aria-label="Close"
+              aria-label="Close lightbox"
             >
               <X size={18} />
             </button>
@@ -412,6 +448,8 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                       <img
                         src={src}
                         alt={`${project?.title} — ${i + 1}`}
+                        width={2432}
+                        height={1368}
                         className="max-h-[80vh] max-w-full object-contain rounded-xl"
                         draggable={false}
                       />

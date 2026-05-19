@@ -1,0 +1,23 @@
+{
+  "name": "Sean Corey — Web Designer for Brands Making a Difference",
+  "short_name": "Sean Corey",
+  "description": "Web Design for brands making a difference. 20 years of craft and judgment.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#253631",
+  "theme_color": "#253631",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

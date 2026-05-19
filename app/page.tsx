@@ -8,7 +8,7 @@ import { Cta } from "@/components/sections/cta";
 
 export default function Home() {
   return (
-    <main>
+    <main id="main-content">
       {/*
         HeroGroup contains:
           - Hero section (100vh)

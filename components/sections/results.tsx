@@ -4,10 +4,10 @@ import { motion } from "motion/react";
 
 const reviews = [
   {
-    quote: "Placeholder testimonial — working with Sean was a genuinely smooth experience from start to finish. The site launched on time, looked exactly right, and our team could actually use it after handoff.",
-    name: "Client Name",
-    title: "Founder, Company",
-    initials: "CN",
+    quote: "The thing I appreciate most is how easy Sean is to work with. Our team — myself, our COO, and our CFO — all communicate with him directly, and he's always professional, patient, and thorough. He works from Asia, and despite the time zone difference, I've never felt like communication was an issue. He's proactive about renewals, transparent about hosting changes, and always gives us options rather than just telling us what to do.",
+    name: "Colt Holeman",
+    title: "CEO / Founder, NGC General Contractors",
+    initials: "CH",
   },
   {
     quote: "Placeholder testimonial — Sean brought real strategic thinking to the project, not just execution. He asked the right questions early and it saved us a lot of back-and-forth later.",
@@ -43,9 +43,9 @@ const reviews = [
 
 function Stars() {
   return (
-    <div className="flex gap-1 mb-6">
+    <div className="flex gap-1 mb-6" aria-label="5 stars">
       {Array.from({ length: 5 }).map((_, i) => (
-        <span key={i} className="text-[1.1rem]" style={{ color: "color-mix(in srgb, var(--color-sage) 70%, #f59e0b)" }}>★</span>
+        <span key={i} aria-hidden="true" className="text-[1.1rem]" style={{ color: "color-mix(in srgb, var(--color-sage) 70%, #f59e0b)" }}>★</span>
       ))}
     </div>
   );
@@ -96,7 +96,7 @@ export function Results() {
               className="break-inside-avoid mb-5 rounded-2xl border border-sage/10 bg-sage/5 p-7"
             >
               <Stars />
-              <p className="text-[1.05rem] text-sage/75 font-sans leading-relaxed mb-7">
+              <p className="text-[1.05rem] text-sage/95 font-sans leading-relaxed mb-7">
                 &ldquo;{review.quote}&rdquo;
               </p>
               <div className="flex items-center gap-3">

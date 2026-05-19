@@ -29,17 +29,23 @@ function WorkCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.75, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      role="button"
+      tabIndex={0}
+      aria-label={`View ${project.title} project`}
       onClick={onSelect}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(); } }}
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
-      className="group cursor-none bg-black/20 rounded-3xl overflow-hidden"
+      className="group cursor-none bg-black/20 rounded-3xl overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
     >
       {thumbnail && (
         <div className="m-[15px] rounded-2xl overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={thumbnail}
-            alt={project.title}
+            alt=""
+            width={2432}
+            height={1368}
             className="w-full h-auto block"
           />
         </div>
@@ -52,12 +58,12 @@ function WorkCard({
         <p className="font-sans text-[1.1rem] text-white/55 leading-relaxed mb-5">
           {project.description}
         </p>
-        <button
-          onClick={onSelect}
-          className="inline-flex items-center gap-1.5 text-[0.75rem] uppercase tracking-[0.15em] text-white/70 underline underline-offset-4 hover:text-white transition-colors duration-200 cursor-pointer font-sans"
+        <span
+          aria-hidden="true"
+          className="inline-flex items-center gap-1.5 text-[0.75rem] uppercase tracking-[0.15em] text-white/70 underline underline-offset-4 group-hover:text-white transition-colors duration-200 font-sans"
         >
           View Project <ArrowUpRight size={13} strokeWidth={1.75} />
-        </button>
+        </span>
       </div>
     </motion.div>
   );

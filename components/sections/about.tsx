@@ -187,6 +187,8 @@ export function About() {
               <img
                 src="/headshot.webp"
                 alt="Sean Corey"
+                width={1600}
+                height={1600}
                 className="w-full block rounded-2xl"
                 style={{ aspectRatio: "4/5", objectFit: "cover", objectPosition: "top" }}
               />

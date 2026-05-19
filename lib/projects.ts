@@ -7,7 +7,7 @@ export type Project = {
   images?: string[];
   url?: string;
   services?: string[];
-  caseStudy?: { heading?: string; text: string }[];
+  caseStudy?: { heading?: string; text: string; links?: { word: string; href: string }[] }[];
 };
 
 export const projects: Project[] = [
@@ -147,15 +147,28 @@ export const projects: Project[] = [
     id: "sage-wisdom-wellness",
     title: "Sage Wisdom & Wellness",
     category: "Web Design",
-    description: "Placeholder description for Sage Wisdom & Wellness.",
+    description: "A clean, professional website for a yoga therapy practice serving women who spend their lives caring for others.",
     gradient: "linear-gradient(135deg, #7a9a8a 0%, #3a5a4a 100%)",
     images: [
       "/sean-corey-design-sage-wisdom-1\.webp",
       "/sean-corey-design-sage-wisdom-2\.webp",
       "/sean-corey-design-sage-wisdom-3\.webp",
-      "/sean-corey-design-sage-wisdom-4\.webp",
     ],
-    services: ["Web Design", "Brand Identity"],
+    services: ["Web Design", "Squarespace", "Booking Integration", "Email Marketing"],
+    caseStudy: [
+      {
+        heading: "The Challenge",
+        text: "Sage Wisdom & Wellness needed a site that felt warm, grounded, and trustworthy to their core audience... women over 50 in the caregiving field. The design needed to speak directly to that audience without feeling clinical or corporate. And the technology needed to stay simple enough for Jeannine to manage independently.",
+      },
+      {
+        heading: "The Approach",
+        text: "I designed and built the site on Squarespace, keeping the tech overhead low and the editing experience straightforward. The design direction prioritized warmth and clarity... a reflection of the practice and the people it serves.",
+      },
+      {
+        heading: undefined,
+        text: "Beyond the site itself, I connected an online booking calendar to automate the signup process, and integrated email marketing with a branded template to match the overall look and feel.",
+      },
+    ],
   },
   {
     id: "vadavas-by-lex",
@@ -167,7 +180,6 @@ export const projects: Project[] = [
       "/sean-corey-design-vadavas-1\.webp",
       "/sean-corey-design-vadavas-2\.webp",
       "/sean-corey-design-vadavas-3\.webp",
-      "/sean-corey-design-vadavas-4\.webp",
     ],
     url: "https://vadavasbylex.com",
     services: ["Ecommerce", "Website Design", "Systems Consulting", "AI Photography"],
@@ -194,21 +206,35 @@ export const projects: Project[] = [
     id: "yoga-hive",
     title: "Yoga Hive",
     category: "Web Design",
-    description: "Placeholder description for Yoga Hive.",
+    description: "A brand identity and website for a yoga studio and wellness community in New Jersey. Built to last and handed off to an owner who actually uses it.",
     gradient: "linear-gradient(135deg, #5a7a7e 0%, #2d4a50 100%)",
     images: [
       "/sean-corey-design-yoga-hive-1\.webp",
       "/sean-corey-design-yoga-hive-2\.webp",
       "/sean-corey-design-yoga-hive-3\.webp",
-      "/sean-corey-design-yoga-hive-4\.webp",
     ],
-    services: ["Web Design", "UX Design"],
+    url: "https://theyogahivenj.com/",
+    services: ["Branding", "Web Design", "WordPress Development", "MindBody Integration"],
+    caseStudy: [
+      {
+        heading: "The Challenge",
+        text: "Yoga Hive needed more than a website. They needed a brand identity that could carry across their site, merchandise, and all marketing materials. Something memorable, clean, and modern... and a web presence that their owner could maintain without relying on a developer for every small change.",
+      },
+      {
+        heading: "The Approach",
+        text: "I started with brand identity, creating a visual foundation designed to work across every touchpoint. The website was built on WordPress with that same brand carried through consistently. For booking, I integrated MindBody... keeping the signup process clean and seamless for their community.",
+      },
+      {
+        heading: undefined,
+        text: "The handoff was a core part of the project. The site was built to empower their owner, Kevin, to take ownership, and he has. Watching him actively update and evolve the site over time is exactly the outcome good design should produce.",
+      },
+    ],
   },
   {
     id: "sean-corey-yoga",
     title: "Sean Corey Yoga",
     category: "Brand Identity",
-    description: "Placeholder description for Sean Corey Yoga.",
+    description: "My own yoga and meditation brand. Built to support online teaching, retreat offerings, and a practice that travels with me.",
     gradient: "linear-gradient(135deg, #7a8a6e 0%, #3a4a2e 100%)",
     images: [
       "/sean-corey-design-sean-corey-yoga-1\.webp",
@@ -216,21 +242,55 @@ export const projects: Project[] = [
       "/sean-corey-design-sean-corey-yoga-3\.webp",
       "/sean-corey-design-sean-corey-yoga-4\.webp",
     ],
-    services: ["Brand Identity", "Web Design"],
+    url: "https://seancoreyoga.com",
+    services: ["Branding", "Web Design", "WordPress Development", "Retreat Landing Pages", "Social Media Assets"],
+    caseStudy: [
+      {
+        heading: "The Challenge",
+        text: "Four years ago I left the US with a clear intention... to teach more yoga online and share the practice more widely. I needed a brand and digital presence that could carry that mission. Something grounded and authentic, not salesy or performative.",
+      },
+      {
+        heading: "The Approach",
+        text: "I built the full brand identity from scratch, carrying it through the website, retreat landing pages, and social media assets. The site needed to work as both a home for my teaching and a functional platform for online offerings and retreats.",
+      },
+      {
+        heading: undefined,
+        text: "It's the project where both sides of my work come together most directly. The design sensibility, the technical execution, and the practice itself.",
+      },
+    ],
   },
   {
     id: "yoga-dorri",
     title: "Yoga Dorri",
     category: "Web Design",
-    description: "Placeholder description for Yoga Dorri.",
+    description: "A full brand and website build for a yoga, coaching, and Reiki practice in South Jersey. Designed to attract, nurture, and convert the right clients automatically.",
     gradient: "linear-gradient(135deg, #a09070 0%, #5a4a30 100%)",
     images: [
       "/sean-corey-design-yoga-dorri-1\.webp",
       "/sean-corey-design-yoga-dorri-2\.webp",
       "/sean-corey-design-yoga-dorri-3\.webp",
-      "/sean-corey-design-yoga-dorri-4\.webp",
     ],
-    services: ["Web Design", "Brand Identity"],
+    url: "https://yogadorri.com",
+    services: ["Branding", "Logo Design", "Squarespace", "Web Design", "AI Imagery", "Email Marketing", "Booking Integration", "Automation"],
+    caseStudy: [
+      {
+        heading: "The Challenge",
+        text: "Dorri needed a complete brand presence from the ground up. Logo, website, and a system that could do some of the work for her... booking, lead generation, and client communication, all running without manual effort on her end.",
+      },
+      {
+        heading: "The Approach",
+        text: "I built the full brand identity including logo design, then carried it through a Squarespace site designed for her coaching and wellness practice. AI image generation was used to create visuals that matched the brand aesthetic without the cost of a full photo shoot.",
+      },
+      {
+        heading: undefined,
+        text: "For automation, I integrated TidyCal for seamless booking and designed a high-value lead magnet to grow her list. The lead magnet connects to an automated email sequence with custom email design matched to the Yoga Dorri brand... so the experience feels consistent from first click through follow-up.",
+        links: [{ word: "TidyCal", href: "https://appsumo.8odi.net/Z6nbkq" }],
+      },
+      {
+        heading: "Ongoing",
+        text: "The foundation is in place. I provide support as needed as her practice continues to grow.",
+      },
+    ],
   },
   // {
   //   id: "smokin-joes",
