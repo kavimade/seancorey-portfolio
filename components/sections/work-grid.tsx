@@ -94,7 +94,7 @@ export function WorkGrid() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="font-display font-bold text-[clamp(2.25rem,5vw,4.5rem)] text-white leading-tight mb-5"
         >
-          My Work
+          Web Design Portfolio
         </motion.h2>
 
         <motion.p

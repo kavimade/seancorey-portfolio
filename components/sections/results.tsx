@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { SITE_URL } from "@/lib/config";
 
 const reviews = [
   {
@@ -14,37 +15,42 @@ const reviews = [
     name: "Client Name",
     title: "CEO, Company",
     initials: "CN",
+    placeholder: true,
   },
   {
     quote: "Placeholder testimonial — the design quality was immediately noticeable. Clean, fast, and on-brand.",
     name: "Client Name",
     title: "Director, Company",
     initials: "CN",
+    placeholder: true,
   },
   {
     quote: "Placeholder testimonial — we had worked with other designers before but the level of craft and communication here was different. Highly recommend.",
     name: "Client Name",
     title: "Founder, Company",
     initials: "CN",
+    placeholder: true,
   },
   {
     quote: "Placeholder testimonial — Sean understood our mission immediately and translated it into something we're proud to show people. The AI-assisted workflow meant we moved faster than expected without sacrificing quality.",
     name: "Client Name",
     title: "Owner, Company",
     initials: "CN",
+    placeholder: true,
   },
   {
     quote: "Placeholder testimonial — straightforward, honest, and delivered exactly what was promised.",
     name: "Client Name",
     title: "Co-Founder, Company",
     initials: "CN",
+    placeholder: true,
   },
 ];
 
 function Stars() {
   return (
     <div className="flex gap-1 mb-6" aria-label="5 stars">
-      {Array.from({ length: 5 }).map((_, i) => (
+      {STAR_INDICES.map((i) => (
         <span key={i} aria-hidden="true" className="text-[1.1rem]" style={{ color: "color-mix(in srgb, var(--color-sage) 70%, #f59e0b)" }}>★</span>
       ))}
     </div>
@@ -59,6 +65,37 @@ function Avatar({ initials }: { initials: string }) {
   );
 }
 
+const realReviews = reviews.filter((r) => !r.placeholder);
+
+const STAR_INDICES = [0, 1, 2, 3, 4];
+
+const reviewSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${SITE_URL}/#service`,
+  name: "Sean Corey Web Design",
+  url: SITE_URL,
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5",
+    reviewCount: String(realReviews.length),
+    bestRating: "5",
+    worstRating: "1",
+  },
+  review: realReviews.map((r) => ({
+    "@type": "Review",
+    author: { "@type": "Person", name: r.name },
+    reviewBody: r.quote,
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: "5",
+      bestRating: "5",
+    },
+  })),
+};
+
+const reviewSchemaJson = JSON.stringify(reviewSchema);
+
 export function Results() {
   return (
     <section
@@ -66,6 +103,10 @@ export function Results() {
       data-section-theme="dark"
       className="bg-forest isolate py-28 lg:py-40"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: reviewSchemaJson }}
+      />
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
         {/* Heading */}
@@ -88,7 +129,7 @@ export function Results() {
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
           {reviews.map((review, idx) => (
             <motion.div
-              key={idx}
+              key={review.name + review.initials + idx}
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}

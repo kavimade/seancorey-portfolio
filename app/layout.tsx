@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "@/lib/config";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -18,8 +19,6 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
 });
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://seancorey.net";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://seancorey.net";
   return [
     {
-      url: base,
+      url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,

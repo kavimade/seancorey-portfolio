@@ -48,7 +48,7 @@ export function Services() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="font-display font-bold text-[clamp(2.25rem,5vw,4.5rem)] text-forest leading-tight mb-8"
             >
-              My Process
+              How I Work With Clients
             </motion.h2>
 
             <motion.p
