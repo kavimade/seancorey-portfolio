@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ArrowRight } from "lucide-react";
 
-const LABEL_CLASS = "block text-[13px] uppercase tracking-[0.2em] text-forest font-sans mb-3";
+const LABEL_CLASS = "block text-[13px] uppercase tracking-[0.2em] text-forest font-sans font-semibold mb-3";
 
 const projectTypes = [
   "New website",
