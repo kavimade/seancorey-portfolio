@@ -1,7 +1,9 @@
 import type { Context } from "@netlify/functions";
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const MIN_ELAPSED_MS = 3_000; // reject submissions faster than 3 seconds
+const MIN_ELAPSED_MS = 3_000;
+
+const LOOPS_API = "https://app.loops.so/api/v1";
 
 export default async (req: Request, _context: Context) => {
   if (req.method !== "POST") {
@@ -11,7 +13,7 @@ export default async (req: Request, _context: Context) => {
   // ── Origin check — only accept requests from this domain ──────────────────
   const origin = req.headers.get("origin") ?? "";
   const allowed = [
-    process.env.URL,           // Netlify sets this automatically
+    process.env.URL,
     "http://localhost:3000",
   ].filter(Boolean);
   if (allowed.length && !allowed.some(o => origin.startsWith(o!))) {
@@ -23,7 +25,6 @@ export default async (req: Request, _context: Context) => {
 
   // ── Honeypot — bots fill this; humans never see it ────────────────────────
   if (honeypot) {
-    // Silent success: don't reveal to the bot that we caught it
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
@@ -50,35 +51,62 @@ export default async (req: Request, _context: Context) => {
     });
   }
 
-  // ── Send via Resend ───────────────────────────────────────────────────────
-  const res = await fetch("https://api.resend.com/emails", {
+  const loopsHeaders = {
+    Authorization: `Bearer ${process.env.LOOPS_API_KEY}`,
+    "Content-Type": "application/json",
+  };
+
+  const trimmedName    = name.trim();
+  const trimmedEmail   = email.trim();
+  const trimmedMessage = message.trim();
+
+  // ── Send transactional notification email via Loops ───────────────────────
+  const emailRes = await fetch(`${LOOPS_API}/transactional`, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      "Content-Type": "application/json",
-    },
+    headers: loopsHeaders,
     body: JSON.stringify({
-      from:     "Sean Corey Portfolio <sean@seancorey.net>",
-      to:       [process.env.CONTACT_EMAIL],
-      reply_to: email.trim(),
-      subject:  `New enquiry from ${name.trim()}`,
-      html: `
-        <p><strong>Name:</strong> ${name.trim()}</p>
-        <p><strong>Email:</strong> <a href="mailto:${email.trim()}">${email.trim()}</a></p>
-        ${projectType ? `<p><strong>Project type:</strong> ${projectType}</p>` : ""}
-        <p><strong>Message:</strong></p>
-        <p>${message.trim().replace(/\n/g, "<br>")}</p>
-      `,
+      transactionalId: process.env.LOOPS_TRANSACTIONAL_ID,
+      email:           "sean@seancorey.net",
+      dataVariables: {
+        name:        trimmedName,
+        email:       trimmedEmail,
+        projectType: projectType ?? "",
+        message:     trimmedMessage,
+      },
     }),
   });
 
-  if (!res.ok) {
-    const err = await res.text();
-    console.error("Resend error:", err);
+  if (!emailRes.ok) {
+    const err = await emailRes.text();
+    console.error("Loops transactional error:", err);
     return new Response(JSON.stringify({ error: "Failed to send." }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
+  }
+
+  // ── Add inquirer to Loops mailing list (non-blocking on failure) ──────────
+  const [firstName, ...rest] = trimmedName.split(" ");
+  const lastName = rest.join(" ") || undefined;
+
+  const listRes = await fetch(`${LOOPS_API}/contacts/update`, {
+    method: "PUT",
+    headers: loopsHeaders,
+    body: JSON.stringify({
+      email:     trimmedEmail,
+      firstName,
+      lastName,
+      source:    "Portfolio Contact Form",
+      mailingLists: {
+        [process.env.LOOPS_LIST_ID!]: true,
+      },
+    }),
+  });
+
+  if (!listRes.ok) {
+    const err = await listRes.text();
+    console.error("Loops contact upsert error:", err);
+    // Don't surface this to the user — email already sent successfully
   }
 
   return new Response(JSON.stringify({ success: true }), {
