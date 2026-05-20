@@ -101,7 +101,7 @@ export function Results() {
     <section
       id="results"
       data-section-theme="dark"
-      className="bg-forest isolate py-28 lg:py-40"
+      className="bg-forest isolate pt-12 pb-16 sm:pt-16 sm:pb-24 lg:py-[calc(var(--spacing)*22)]"
     >
       <script
         type="application/ld+json"
@@ -115,12 +115,12 @@ export function Results() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-16 sm:mb-20"
+          className="text-left mb-16 sm:mb-20"
         >
           <h2 className="font-display font-bold text-[clamp(2.25rem,5vw,4.5rem)] text-sage leading-tight mb-5">
             Results
           </h2>
-          <p className="text-[1.2rem] text-sage/55 font-sans max-w-xl mx-auto leading-relaxed">
+          <p className="text-[1.2rem] text-sage/55 font-sans max-w-xl leading-relaxed">
             What clients say about working together.
           </p>
         </motion.div>

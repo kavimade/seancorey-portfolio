@@ -1,6 +1,6 @@
 import { HeroGroup } from "@/components/sections/hero-group";
 import { WorkGrid } from "@/components/sections/work-grid";
-import { Results } from "@/components/sections/results";
+// import { Results } from "@/components/sections/results"; // TODO: restore when client reviews are in
 import { DarkTransitionGroup, LightTransitionGroup } from "@/components/sections/values-group";
 import { Services } from "@/components/sections/services";
 import { About } from "@/components/sections/about";
@@ -19,7 +19,7 @@ export default function Home() {
       */}
       <HeroGroup />
       <WorkGrid />
-      <Results />
+      {/* <Results /> */}{/* TODO: restore when client reviews are in */}
       <DarkTransitionGroup />
       <Services />
       {/* Spacer — same height as the transition div, gives breathing room before About */}

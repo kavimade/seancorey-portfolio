@@ -2,7 +2,7 @@ import type React from "react";
 
 export const NAV_LINKS = [
   { id: "work",    label: "Work"    },
-  { id: "results", label: "Results" },
+  // { id: "results", label: "Results" }, // TODO: restore when client reviews are in
   { id: "process", label: "Process" },
   { id: "about",   label: "About"   },
   { id: "contact", label: "Contact" },
@@ -14,8 +14,6 @@ export function scrollToSection(id: string, e?: React.MouseEvent) {
   if (!target) return;
 
   const start    = window.scrollY;
-  const end      = target.getBoundingClientRect().top + window.scrollY - 75;
-  const distance = end - start;
   const duration = 1400; // ms — slow, premium feel
   let startTime: number | null = null;
 
@@ -27,7 +25,10 @@ export function scrollToSection(id: string, e?: React.MouseEvent) {
   function step(ts: number) {
     if (!startTime) startTime = ts;
     const progress = Math.min((ts - startTime) / duration, 1);
-    window.scrollTo(0, start + distance * ease(progress));
+    // Re-read each frame so layout shifts during animation (fonts, preloader)
+    // don't leave us at the wrong position.
+    const end = target.getBoundingClientRect().top + window.scrollY - 75;
+    window.scrollTo(0, start + (end - start) * ease(progress));
     if (progress < 1) requestAnimationFrame(step);
   }
 
