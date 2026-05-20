@@ -3,11 +3,7 @@ import { Bricolage_Grotesque, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { SITE_URL } from "@/lib/config";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { BackToTop } from "@/components/ui/back-to-top";
-import { Preloader } from "@/components/ui/preloader";
+import { SiteShell } from "@/components/layout/site-shell";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -127,18 +123,7 @@ export default function RootLayout({
       </Script>
       <body className="min-h-screen antialiased">
         <a href="#main-content" className="skip-link">Skip to main content</a>
-        <Preloader />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          disableTransitionOnChange={false}
-        >
-          <Navbar />
-          {children}
-          <Footer />
-          <BackToTop />
-        </ThemeProvider>
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

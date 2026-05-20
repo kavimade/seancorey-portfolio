@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { WorkCursor } from "@/components/ui/work-cursor";
 import { ProjectModal } from "@/components/ui/project-modal";
-import { projects } from "@/lib/projects";
+import type { SanityProject } from "@/sanity/lib/queries";
 
 // ── Per-card component ────────────────────────────────────────────────────────
 function WorkCard({
@@ -15,7 +15,7 @@ function WorkCard({
   onHoverStart,
   onHoverEnd,
 }: {
-  project: (typeof projects)[0];
+  project: SanityProject;
   idx: number;
   onSelect: () => void;
   onHoverStart: () => void;
@@ -70,7 +70,7 @@ function WorkCard({
 }
 
 // ── Main grid ────────────────────────────────────────────────────────────────
-export function WorkGrid() {
+export function WorkGrid({ projects }: { projects: SanityProject[] }) {
   const [selectedId, setSelectedId]   = useState<string | null>(null);
   const [isHovering, setIsHovering]   = useState(false);
 
