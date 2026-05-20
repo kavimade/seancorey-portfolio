@@ -12,6 +12,7 @@ export function scrollToSection(id: string, e?: React.MouseEvent) {
   e?.preventDefault();
   const target = document.getElementById(id);
   if (!target) return;
+  const el = target; // non-null alias for closure use
 
   const start    = window.scrollY;
   const duration = 1400; // ms — slow, premium feel
@@ -27,7 +28,7 @@ export function scrollToSection(id: string, e?: React.MouseEvent) {
     const progress = Math.min((ts - startTime) / duration, 1);
     // Re-read each frame so layout shifts during animation (fonts, preloader)
     // don't leave us at the wrong position.
-    const end = target.getBoundingClientRect().top + window.scrollY - 75;
+    const end = el.getBoundingClientRect().top + window.scrollY - 75;
     window.scrollTo(0, start + (end - start) * ease(progress));
     if (progress < 1) requestAnimationFrame(step);
   }
