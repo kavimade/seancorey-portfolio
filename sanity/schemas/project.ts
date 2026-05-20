@@ -52,7 +52,8 @@ export const projectSchema = defineType({
       name: "images",
       title: "Images",
       type: "array",
-      of: [{ type: "image", options: { hotspot: true } }],
+      of: [{ type: "string" }],
+      description: "Paths relative to /public (e.g. /sean-corey-design-moka-1.webp)",
     }),
     defineField({
       name: "caseStudy",

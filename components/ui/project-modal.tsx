@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef, useId } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "motion/react";
 import { X, ChevronLeft, ChevronRight, ArrowUpRight, ArrowLeft, ArrowRight, Maximize2 } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
-import type { Project } from "@/lib/projects";
+import type { SanityProject } from "@/sanity/lib/queries";
 
 function renderText(text: string, links?: { word: string; href: string }[]) {
   if (!links?.length) return text;
@@ -27,7 +27,7 @@ function renderText(text: string, links?: { word: string; href: string }[]) {
 }
 
 interface ProjectModalProps {
-  project: Project | null;
+  project: SanityProject | null;
   onClose: () => void;
 }
 

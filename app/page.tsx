@@ -5,8 +5,13 @@ import { DarkTransitionGroup, LightTransitionGroup } from "@/components/sections
 import { Services } from "@/components/sections/services";
 import { About } from "@/components/sections/about";
 import { Cta } from "@/components/sections/cta";
+import { client } from "@/sanity/lib/client";
+import { PROJECTS_QUERY } from "@/sanity/lib/queries";
+import type { SanityProject } from "@/sanity/lib/queries";
 
-export default function Home() {
+export default async function Home() {
+  const projects = await client.fetch<SanityProject[]>(PROJECTS_QUERY);
+
   return (
     <main id="main-content">
       {/*
@@ -18,7 +23,7 @@ export default function Home() {
         WorkGrid upward, creating the seamless overlap into the dark zone.
       */}
       <HeroGroup />
-      <WorkGrid />
+      <WorkGrid projects={projects} />
       {/* <Results /> */}{/* TODO: restore when client reviews are in */}
       <DarkTransitionGroup />
       <Services />
