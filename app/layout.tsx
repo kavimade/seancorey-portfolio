@@ -40,10 +40,8 @@ export const metadata: Metadata = {
     icon: [
       { url: "/favicon.webp", type: "image/webp", sizes: "512x512" },
       { url: "/favicon.png",  type: "image/png",  sizes: "512x512" },
-      { url: "/favicon.ico",  sizes: "any" },
     ],
-    apple:    [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   manifest: "/site.webmanifest",
 };

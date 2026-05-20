@@ -98,19 +98,19 @@ export const projects: Project[] = [
     caseStudy: [
       {
         heading: "The Challenge",
-        text: "What began as the Wisdom Library, a foundational blog for the Himalayan Institute, needed to evolve into something much larger. When the COVID-19 pandemic hit, the organization needed a way to carry their teachings online at scale. The answer was HI Online... a full platform supporting courses, memberships, and community. It was a substantial effort that touched every part of the organization.",
+        text: "What began as the Wisdom Library, a foundational blog for the Himalayan Institute, needed to evolve into something much larger. When COVID-19 hit, the organization needed a way to carry their teachings online at scale. The answer was HI Online... courses, memberships, and community. It was a big lift that touched every part of the organization.",
       },
       {
         heading: "The Approach",
-        text: "My role spanned the full project lifecycle. I handled wireframing, architecture, planning, web design, and development. On the marketing side I contributed to strategy, email templates, and user flows... ensuring the experience felt cohesive from first visit through active membership.",
+        text: "My role spanned the full project lifecycle. Wireframing, architecture, planning, web design, and development. On the marketing side I contributed to strategy, email templates, and user flows, so the experience felt consistent from first visit through active membership.",
       },
       {
         heading: undefined,
-        text: "The infrastructure work was significant. The team migrated 1,000+ pieces of content and active membership accounts between systems, updated the entire site architecture, and moved everything to a new server before launch. No downtime. No disruption to existing members.",
+        text: "The infrastructure work was significant. The team migrated 1,000+ pieces of content and active membership accounts, updated the entire site architecture, and moved everything to a new server before launch. No downtime. No disruption to existing members.",
       },
       {
         heading: "Ongoing",
-        text: "HI Online continues to grow as a core pillar of the Himalayan Institute's digital presence. The platform that launched out of necessity has become a durable, scalable foundation for their mission.",
+        text: "HI Online continues to grow as a core part of the Himalayan Institute's digital presence. What launched out of necessity has become a solid, lasting foundation for their mission.",
       },
     ],
   },
@@ -131,15 +131,15 @@ export const projects: Project[] = [
     caseStudy: [
       {
         heading: "The Challenge",
-        text: "Vishoka Meditation is a distinct brand and teaching lineage, separate from the Himalayan Institute but rooted in the same tradition. They needed a new site built from scratch... one that could clearly communicate the practice, capture organic traffic, and stand on its own as an independent brand presence.",
+        text: "Vishoka Meditation is a distinct brand and teaching lineage, separate from the Himalayan Institute but rooted in the same tradition. They needed a new site built from scratch... one that could clearly communicate the practice, capture organic traffic, and stand on its own.",
       },
       {
         heading: "The Approach",
-        text: "I handled the website design, development, and strategy. The design direction was intentionally clean and minimalistic, letting the teaching speak without distraction. The site needed to be clear and focused... a reflection of the practice itself.",
+        text: "I handled the website design, development, and strategy. The design direction was intentionally clean and minimal, letting the teaching speak without distraction. Clear and focused... a reflection of the practice itself.",
       },
       {
         heading: undefined,
-        text: "As the teaching grew, the site evolved with it. A searchable Teacher Directory and online course listing were added over time, expanding the site's utility without compromising its simplicity.",
+        text: "As the teaching grew, the site grew with it. A searchable Teacher Directory and online course listing were added over time, expanding what the site could do without changing what it felt like.",
       },
     ],
   },
@@ -158,15 +158,11 @@ export const projects: Project[] = [
     caseStudy: [
       {
         heading: "The Challenge",
-        text: "Sage Wisdom & Wellness needed a site that felt warm, grounded, and trustworthy to their core audience... women over 50 in the caregiving field. The design needed to speak directly to that audience without feeling clinical or corporate. And the technology needed to stay simple enough for Jeannine to manage independently.",
+        text: "Sage Wisdom & Wellness needed a site that felt warm and trustworthy to their core audience... women over 50 in the caregiving field. The design needed to speak to that audience without feeling clinical or corporate. And the tech needed to stay simple enough for Jeannine to manage on her own.",
       },
       {
         heading: "The Approach",
-        text: "I designed and built the site on Squarespace, keeping the tech overhead low and the editing experience straightforward. The design direction prioritized warmth and clarity... a reflection of the practice and the people it serves.",
-      },
-      {
-        heading: undefined,
-        text: "Beyond the site itself, I connected an online booking calendar to automate the signup process, and integrated email marketing with a branded template to match the overall look and feel.",
+        text: "Built on Squarespace, with low overhead and a straightforward editing experience. The design prioritized warmth and clarity. Beyond the site, I connected an online booking calendar to simplify signups, and set up email marketing with a branded template to match.",
       },
     ],
   },
@@ -186,19 +182,19 @@ export const projects: Project[] = [
     caseStudy: [
       {
         heading: "The Challenge",
-        text: "Vadavas By Lex was running on an outdated POS system with no clean path to selling across social channels. They needed a modern online store that could integrate with Instagram and TikTok automatically, present their handmade jewelry beautifully, and do it all without the overhead of their existing setup.",
+        text: "Vadavas By Lex was running on an outdated POS system with no clean path to selling across social channels. They needed a modern store that could connect to Instagram and TikTok automatically, present their jewelry well, and cost a lot less to run.",
       },
       {
         heading: "The Approach",
-        text: "I rebuilt their ecommerce foundation on a modern platform, connecting their store directly to their social sales channels so inventory, orders, and listings stay in sync. The new system was significantly more affordable than what they were running, saving thousands of dollars per year.",
+        text: "I rebuilt their ecommerce foundation on a modern platform, connecting the store directly to their social channels so inventory and listings stay in sync. The move saved them thousands of dollars per year compared to their old setup.",
       },
       {
         heading: undefined,
-        text: "The product photography needed a refresh but a full shoot wasn't in the budget. I used AI image tools to refine the existing photos... delivering a polished, consistent result at a fraction of the cost.",
+        text: "Product photography needed a refresh but a full shoot wasn't in the budget. I used AI image tools to clean up and refine the existing photos... a polished result at a fraction of the cost.",
       },
       {
         heading: "The Outcome",
-        text: "A cleaner store. Lower overhead. Product photos that convert. And a sales infrastructure that grows with them as their social presence grows.",
+        text: "A cleaner store. Lower overhead. Product photos that convert. And a sales setup that grows with them.",
       },
     ],
   },
@@ -275,20 +271,20 @@ export const projects: Project[] = [
     caseStudy: [
       {
         heading: "The Challenge",
-        text: "Dorri needed a complete brand presence from the ground up. Logo, website, and a system that could do some of the work for her... booking, lead generation, and client communication, all running without manual effort on her end.",
+        text: "Dorri needed a complete brand presence. Logo, website, and a system that could handle some of the work for her... booking, lead generation, and client communication, running without manual effort on her end.",
       },
       {
         heading: "The Approach",
-        text: "I built the full brand identity including logo design, then carried it through a Squarespace site designed for her coaching and wellness practice. AI image generation was used to create visuals that matched the brand aesthetic without the cost of a full photo shoot.",
+        text: "Full brand identity including logo, carried through a Squarespace site built for her coaching and wellness practice. AI image generation filled the visual gaps without the cost of a full shoot.",
       },
       {
         heading: undefined,
-        text: "For automation, I integrated TidyCal for seamless booking and designed a high-value lead magnet to grow her list. The lead magnet connects to an automated email sequence with custom email design matched to the Yoga Dorri brand... so the experience feels consistent from first click through follow-up.",
+        text: "For automation, I set up TidyCal for booking and designed a lead magnet to grow her list. The whole sequence runs automatically... custom email design, matched to the Yoga Dorri brand, from first signup through follow-up.",
         links: [{ word: "TidyCal", href: "https://appsumo.8odi.net/Z6nbkq" }],
       },
       {
         heading: "Ongoing",
-        text: "The foundation is in place. I provide support as needed as her practice continues to grow.",
+        text: "I provide support as needed as her practice grows.",
       },
     ],
   },
