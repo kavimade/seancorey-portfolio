@@ -10,18 +10,22 @@ export default async (req: Request, _context: Context) => {
     return new Response("Method not allowed", { status: 405 });
   }
 
-  // ── Origin check — only accept requests from this domain ──────────────────
-  const origin = req.headers.get("origin") ?? "";
-  const allowed = [
-    process.env.URL,
-    "http://localhost:3000",
-  ].filter(Boolean);
-  if (allowed.length && !allowed.some(o => origin.startsWith(o!))) {
-    return new Response("Forbidden", { status: 403 });
+  let body: Record<string, unknown>;
+  try {
+    body = await req.json();
+  } catch (err) {
+    console.error("Failed to parse request body:", err);
+    return new Response(JSON.stringify({ error: "Invalid request." }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
   }
-
-  const body = await req.json();
-  const { name, email, projectType, message, honeypot, loadTime } = body;
+  const name        = body.name        as string | undefined;
+  const email       = body.email       as string | undefined;
+  const projectType = body.projectType as string | undefined;
+  const message     = body.message     as string | undefined;
+  const honeypot    = body.honeypot    as string | undefined;
+  const loadTime    = body.loadTime    as number | undefined;
 
   // ── Honeypot — bots fill this; humans never see it ────────────────────────
   if (honeypot) {
