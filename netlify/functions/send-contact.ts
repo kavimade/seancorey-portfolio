@@ -68,10 +68,10 @@ export default async (req: Request, _context: Context) => {
       transactionalId: process.env.LOOPS_TRANSACTIONAL_ID,
       email:           "sean@seancorey.net",
       dataVariables: {
-        name:        trimmedName,
-        email:       trimmedEmail,
-        projectType: projectType ?? "",
-        message:     trimmedMessage,
+        DATA_VARIABLEname:        trimmedName,
+        DATA_VARIABLEemail:       trimmedEmail,
+        DATA_VARIABLEprojectType: projectType ?? "",
+        DATA_VARIABLEmessage:     trimmedMessage,
       },
     }),
   });
