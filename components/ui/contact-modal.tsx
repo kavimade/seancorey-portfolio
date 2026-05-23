@@ -94,7 +94,7 @@ export function ContactModal({
     setSending(true);
     setSubmitError("");
     try {
-      const res = await fetch("/.netlify/functions/send-contact", {
+      const res = await fetch("/api/send-contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

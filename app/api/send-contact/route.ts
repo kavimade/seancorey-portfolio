@@ -1,25 +1,18 @@
-import type { Context } from "@netlify/functions";
+import { type NextRequest, NextResponse } from "next/server";
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_ELAPSED_MS = 3_000;
-
 const LOOPS_API = "https://app.loops.so/api/v1";
 
-export default async (req: Request, _context: Context) => {
-  if (req.method !== "POST") {
-    return new Response("Method not allowed", { status: 405 });
-  }
-
+export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
   try {
     body = await req.json();
   } catch (err) {
     console.error("Failed to parse request body:", err);
-    return new Response(JSON.stringify({ error: "Invalid request." }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
+
   const name        = body.name        as string | undefined;
   const email       = body.email       as string | undefined;
   const projectType = body.projectType as string | undefined;
@@ -27,32 +20,20 @@ export default async (req: Request, _context: Context) => {
   const honeypot    = body.honeypot    as string | undefined;
   const loadTime    = body.loadTime    as number | undefined;
 
-  // ── Honeypot — bots fill this; humans never see it ────────────────────────
   if (honeypot) {
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json({ success: true });
   }
 
-  // ── Timing check — under 3 s almost certainly a bot ──────────────────────
   if (!loadTime || Date.now() - loadTime < MIN_ELAPSED_MS) {
-    return new Response(JSON.stringify({ error: "Submission too fast." }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json({ error: "Submission too fast." }, { status: 400 });
   }
 
-  // ── Server-side field validation ──────────────────────────────────────────
   if (
     typeof name    !== "string" || name.trim().length    < 2  ||
     typeof email   !== "string" || !emailRe.test(email.trim()) ||
     typeof message !== "string" || message.trim().length < 20
   ) {
-    return new Response(JSON.stringify({ error: "Invalid fields." }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json({ error: "Invalid fields." }, { status: 400 });
   }
 
   const loopsHeaders = {
@@ -64,7 +45,6 @@ export default async (req: Request, _context: Context) => {
   const trimmedEmail   = email.trim();
   const trimmedMessage = message.trim();
 
-  // ── Send transactional notification email via Loops ───────────────────────
   const emailRes = await fetch(`${LOOPS_API}/transactional`, {
     method: "POST",
     headers: loopsHeaders,
@@ -83,13 +63,9 @@ export default async (req: Request, _context: Context) => {
   if (!emailRes.ok) {
     const err = await emailRes.text();
     console.error("Loops transactional error:", err);
-    return new Response(JSON.stringify({ error: "Failed to send." }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json({ error: "Failed to send." }, { status: 500 });
   }
 
-  // ── Add inquirer to Loops mailing list (non-blocking on failure) ──────────
   const [firstName, ...rest] = trimmedName.split(" ");
   const lastName = rest.join(" ") || undefined;
 
@@ -110,11 +86,7 @@ export default async (req: Request, _context: Context) => {
   if (!listRes.ok) {
     const err = await listRes.text();
     console.error("Loops contact upsert error:", err);
-    // Don't surface this to the user — email already sent successfully
   }
 
-  return new Response(JSON.stringify({ success: true }), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
-};
+  return NextResponse.json({ success: true });
+}
