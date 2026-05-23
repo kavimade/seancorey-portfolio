@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SITE_URL } from "@/lib/config";
 import { SiteShell } from "@/components/layout/site-shell";
@@ -124,6 +125,7 @@ export default function RootLayout({
       <body className="min-h-screen antialiased">
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <SiteShell>{children}</SiteShell>
+        <Analytics />
       </body>
     </html>
   );
