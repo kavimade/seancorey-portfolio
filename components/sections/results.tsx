@@ -6,7 +6,7 @@ import { SITE_URL } from "@/lib/config";
 
 const reviews = [
   {
-    quote: "Sean has managed and evolved our website assets with a combination of technical skill, creativity, and flexibility that's rare to find. One thing I especially appreciate is that Sean genuinely looks for ways to save us money and reduce unnecessary design time. Instead of creating dependency, he helps establish systems that allow our team to handle things internally when appropriate. That kind of transparency says a lot.",
+    quote: "Sean has been a remarkable asset to our team over the years. He has managed and evolved our website assets with a combination of strong technical skill, creativity, flexibility, and reliability that's rare to find. In a fast-moving business environment, having a web partner who is adaptable, calm under pressure, responsive, and committed to getting things right makes a huge difference. I highly recommend Sean Corey Design to anyone looking for a talented, trustworthy, and dependable web designer and creative partner.",
     name: "Jeff A.",
     title: "Moka Origins",
     photo: "/sean-corey-design-client-jeff.webp",

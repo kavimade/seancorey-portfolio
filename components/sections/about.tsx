@@ -90,8 +90,8 @@ const eras = [
 const stats = [
   { value: "20", unit: "yrs", label: "On the internet" },
   { value: "150+", unit: "", label: "Projects launched" },
-  { value: "9+", unit: "", label: "Years at HI" },
-  { value: "13+", unit: "", label: "Years of yoga" },
+  { value: "3M+", unit: "", label: "Revenue for clients" },
+  { value: "14+", unit: "", label: "Years of yoga" },
 ];
 
 type Particle = { id: number; x: number; y: number; dx: number; dy: number; opacity: number };
