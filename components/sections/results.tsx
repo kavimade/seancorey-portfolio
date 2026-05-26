@@ -6,7 +6,19 @@ import { SITE_URL } from "@/lib/config";
 
 const reviews = [
   {
-    quote: "Sean built our company website in 2022, and nearly four years later he's still the only person I call when we need anything web-related. He's not just a web designer — he's a one-stop shop for anything related to our digital presence. If you're looking for someone who builds something great and then actually sticks around to maintain it, Sean is your guy.",
+    quote: "Sean has managed and evolved our website assets with a combination of technical skill, creativity, and flexibility that's rare to find. One thing I especially appreciate is that Sean genuinely looks for ways to save us money and reduce unnecessary design time. Instead of creating dependency, he helps establish systems that allow our team to handle things internally when appropriate. That kind of transparency says a lot.",
+    name: "Jeff A.",
+    title: "Moka Origins",
+    photo: "/sean-corey-design-client-jeff.webp",
+  },
+  {
+    quote: "Sean brings a rare combination of technical skill, creativity, and professionalism to every project. Clean, modern, highly functional frontend design. Deep understanding of user experience and performance. Whether building out polished landing pages, refining user interfaces, or collaborating on larger-scale digital experiences, he approaches the work with thoughtfulness, efficiency, and attention to detail. An invaluable creative and technical partner.",
+    name: "Aaron L.",
+    title: "Himalayan Institute",
+    photo: "/sean-corey-design-client-aaron.webp",
+  },
+  {
+    quote: "Beyond the website itself, Sean has managed our hosting, DNS, domain registration, Google Business setup and verification, SEO indexing, and even helped us configure Cloudflare tunnels when we deployed an internal AI tool. He's not just a web designer; he's a one-stop shop for anything related to our digital presence. I've referred Sean to colleagues without hesitation, and I'll continue to do so.",
     name: "Colt H.",
     title: "CEO / Founder, NGC General Contractors",
     photo: "/sean-corey-design-client-colt.webp",
@@ -16,18 +28,6 @@ const reviews = [
     name: "Joelle H.",
     title: "Brooklyn Book Doctor",
     photo: "/sean-corey-design-client-joelle.webp",
-  },
-  {
-    quote: "Sean has managed and evolved our website assets with a combination of technical skill, creativity, and flexibility that's rare to find. One thing I especially appreciate is that Sean genuinely looks for ways to save us money and reduce unnecessary design time. Instead of creating dependency, he helps establish systems that allow our team to handle things internally when appropriate. That kind of transparency says a lot.",
-    name: "Jeff A.",
-    title: "Moka Origins",
-    photo: "/sean-corey-design-client-jeff.webp",
-  },
-  {
-    quote: "Sean brings a rare combination of technical skill, creativity, and professionalism to every project. Clean, modern, highly functional frontend design. Deep understanding of user experience and performance. An invaluable creative and technical partner.",
-    name: "Aaron L.",
-    title: "Himalayan Institute",
-    photo: "/sean-corey-design-client-aaron.webp",
   },
 ];
 
