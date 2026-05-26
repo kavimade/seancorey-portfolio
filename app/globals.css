@@ -255,6 +255,10 @@
   .text-forest\/70 { color: color-mix(in srgb, var(--color-forest) 70%, transparent); }
   .text-forest\/75 { color: color-mix(in srgb, var(--color-forest) 75%, transparent); }
 
+  /* ── Review card stars ── */
+  .review-star                  { color: color-mix(in srgb, var(--color-sage) 70%, #f59e0b); transition: color 300ms; }
+  .group:hover .review-star     { color: var(--color-forest); }
+
   /* ── Borders ── */
   .border-forest     { border-color: var(--color-forest); }
   .border-forest\/12 { border-color: color-mix(in srgb, var(--color-forest) 12%, transparent); }

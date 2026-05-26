@@ -1,21 +1,33 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SITE_URL } from "@/lib/config";
 import { SiteShell } from "@/components/layout/site-shell";
 
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
+const bricolage = localFont({
   variable: "--font-bricolage",
   display: "swap",
+  src: [
+    { path: "../public/fonts/bricolage-grotesque-400.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/bricolage-grotesque-500.woff2", weight: "500", style: "normal" },
+    { path: "../public/fonts/bricolage-grotesque-600.woff2", weight: "600", style: "normal" },
+    { path: "../public/fonts/bricolage-grotesque-700.woff2", weight: "700", style: "normal" },
+  ],
 });
 
-const inter = Inter({
-  subsets: ["latin"],
+const beVietnamPro = localFont({
   variable: "--font-inter",
   display: "swap",
+  src: [
+    { path: "../public/fonts/be-vietnam-pro-300.woff2",        weight: "300", style: "normal" },
+    { path: "../public/fonts/be-vietnam-pro-400.woff2",        weight: "400", style: "normal" },
+    { path: "../public/fonts/be-vietnam-pro-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "../public/fonts/be-vietnam-pro-500.woff2",        weight: "500", style: "normal" },
+    { path: "../public/fonts/be-vietnam-pro-600.woff2",        weight: "600", style: "normal" },
+    { path: "../public/fonts/be-vietnam-pro-700.woff2",        weight: "700", style: "normal" },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -81,7 +93,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${inter.variable}`}
+      className={`${bricolage.variable} ${beVietnamPro.variable}`}
       suppressHydrationWarning
     >
       <head>

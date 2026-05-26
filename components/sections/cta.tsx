@@ -32,7 +32,7 @@ export function Cta() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[1.2rem] sm:text-[1.5rem] text-white/70 leading-relaxed font-sans max-w-2xl sm:mx-auto mb-12"
+            className="text-[1.33rem] text-white/70 leading-relaxed font-sans max-w-2xl sm:mx-auto mb-12"
           >
             If you&apos;re working on something meaningful and want a thoughtful partner
             who understands both the technical and human side of building digital

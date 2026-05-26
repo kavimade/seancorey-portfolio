@@ -217,7 +217,7 @@ export function About() {
                 {era.body.map((para, i) => (
                   <p
                     key={i}
-                    className={`text-[1.2rem] text-forest/75 leading-relaxed font-sans${i > 0 ? " mt-4" : ""}`}
+                    className={`text-[1.1rem] text-forest/75 leading-relaxed font-sans${i > 0 ? " mt-4" : ""}`}
                   >
                     {para}
                   </p>

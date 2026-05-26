@@ -55,7 +55,7 @@ function WorkCard({
         <p className="font-display font-bold text-white text-[1.45rem] leading-tight mb-2">
           {project.title}
         </p>
-        <p className="font-sans text-[1.1rem] text-white/55 leading-relaxed mb-5">
+        <p className="font-sans text-[1rem] text-white/55 leading-relaxed mb-5">
           {project.description}
         </p>
         <span
@@ -102,7 +102,7 @@ export function WorkGrid({ projects }: { projects: SanityProject[] }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-[1.1rem] sm:text-[1.3rem] text-white/60 leading-relaxed font-sans max-w-xl mb-[calc(var(--spacing)*11)] lg:mb-[calc(var(--spacing)*15)]"
+          className="text-[1.2rem] text-white/60 leading-relaxed font-sans max-w-xl mb-[calc(var(--spacing)*11)] lg:mb-[calc(var(--spacing)*15)]"
         >
           A selection of projects spanning e-commerce, education, wellness, and mission-driven brands.
         </motion.p>

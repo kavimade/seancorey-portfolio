@@ -12,7 +12,7 @@ const reviews = [
     photo: "/sean-corey-design-client-colt.webp",
   },
   {
-    quote: "Sean is a creative technician who brings hands-on experience and invaluable insights to any project. Working with Sean, I know we're making something of quality. Something up-to-date and reliable.",
+    quote: "Sean is a creative technician who brings hands-on experience and invaluable insights to any project. He helps me refine my ideas and implement solutions that not only work well but look good. Working with Sean, I know we're making something of quality, something up-to-date and reliable. Plus, he's a great guy. I highly recommend him!",
     name: "Joelle H.",
     title: "Brooklyn Book Doctor",
     photo: "/sean-corey-design-client-joelle.webp",
@@ -35,7 +35,7 @@ function Stars() {
   return (
     <div className="flex gap-1 mb-6" aria-label="5 stars">
       {STAR_INDICES.map((i) => (
-        <span key={i} aria-hidden="true" className="text-[1.1rem]" style={{ color: "color-mix(in srgb, var(--color-sage) 70%, #f59e0b)" }}>★</span>
+        <span key={i} aria-hidden="true" className="text-[1.1rem] review-star">★</span>
       ))}
     </div>
   );
@@ -44,15 +44,15 @@ function Stars() {
 function Avatar({ name, photo }: { name: string; photo?: string }) {
   if (photo) {
     return (
-      <div className="w-9 h-9 rounded-full flex-shrink-0 overflow-hidden border border-sage/20">
+      <div className="w-9 h-9 rounded-full flex-shrink-0 overflow-hidden border border-sage/20 transition-colors duration-300 group-hover:border-forest/20">
         <Image src={photo} alt={name} width={36} height={36} className="w-full h-full object-cover" />
       </div>
     );
   }
   const initials = name.split(" ").map((p) => p[0]).join("").slice(0, 2);
   return (
-    <div className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center bg-sage/20 border border-sage/20">
-      <span className="font-display font-bold text-[0.65rem] text-sage/70">{initials}</span>
+    <div className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center bg-sage/20 border border-sage/20 transition-colors duration-300 group-hover:bg-forest/10 group-hover:border-forest/20">
+      <span className="font-display font-bold text-[0.65rem] text-sage/70 transition-colors duration-300 group-hover:text-forest/70">{initials}</span>
     </div>
   );
 }
@@ -118,7 +118,7 @@ export function Results() {
         </motion.div>
 
         {/* Masonry card grid */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {reviews.map((review, idx) => (
             <motion.div
               key={review.name + idx}
@@ -126,17 +126,17 @@ export function Results() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: idx * 0.07, ease: [0.22, 1, 0.36, 1] }}
-              className="break-inside-avoid mb-5 rounded-2xl border border-sage/10 bg-sage/5 p-7"
+              className="flex flex-col rounded-2xl border border-sage/10 bg-sage/5 p-7 group transition-colors duration-300 hover:bg-sage hover:border-forest/15 cursor-default"
             >
               <Stars />
-              <p className="text-[1.05rem] text-sage/95 font-sans leading-relaxed mb-7">
+              <p className="text-[1.05rem] text-sage/95 font-sans leading-relaxed mb-7 flex-1 transition-colors duration-300 group-hover:text-forest">
                 &ldquo;{review.quote}&rdquo;
               </p>
               <div className="flex items-center gap-3">
                 <Avatar name={review.name} photo={review.photo} />
                 <div>
-                  <p className="font-display font-semibold text-sage text-[0.95rem] leading-tight">{review.name}</p>
-                  {review.title && <p className="font-sans text-[0.8rem] text-sage/45 mt-0.5">{review.title}</p>}
+                  <p className="font-display font-semibold text-sage text-[0.95rem] leading-tight transition-colors duration-300 group-hover:text-forest">{review.name}</p>
+                  {review.title && <p className="font-sans text-[0.8rem] text-sage/45 mt-0.5 transition-colors duration-300 group-hover:text-forest/55">{review.title}</p>}
                 </div>
               </div>
             </motion.div>
