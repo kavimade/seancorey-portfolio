@@ -1,49 +1,33 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import { SITE_URL } from "@/lib/config";
 
 const reviews = [
   {
-    quote: "The thing I appreciate most is how easy Sean is to work with. Our team — myself, our COO, and our CFO — all communicate with him directly, and he's always professional, patient, and thorough. He works from Asia, and despite the time zone difference, I've never felt like communication was an issue. He's proactive about renewals, transparent about hosting changes, and always gives us options rather than just telling us what to do.",
-    name: "Colt Holeman",
+    quote: "Sean built our company website in 2022, and nearly four years later he's still the only person I call when we need anything web-related. He's not just a web designer — he's a one-stop shop for anything related to our digital presence. If you're looking for someone who builds something great and then actually sticks around to maintain it, Sean is your guy.",
+    name: "Colt H.",
     title: "CEO / Founder, NGC General Contractors",
-    initials: "CH",
+    photo: "/sean-corey-design-client-colt.webp",
   },
   {
-    quote: "Placeholder testimonial — Sean brought real strategic thinking to the project, not just execution. He asked the right questions early and it saved us a lot of back-and-forth later.",
-    name: "Client Name",
-    title: "CEO, Company",
-    initials: "CN",
-    placeholder: true,
+    quote: "Sean is a creative technician who brings hands-on experience and invaluable insights to any project. Working with Sean, I know we're making something of quality. Something up-to-date and reliable.",
+    name: "Joelle H.",
+    title: "Brooklyn Book Doctor",
+    photo: "/sean-corey-design-client-joelle.webp",
   },
   {
-    quote: "Placeholder testimonial — the design quality was immediately noticeable. Clean, fast, and on-brand.",
-    name: "Client Name",
-    title: "Director, Company",
-    initials: "CN",
-    placeholder: true,
+    quote: "Sean has managed and evolved our website assets with a combination of technical skill, creativity, and flexibility that's rare to find. One thing I especially appreciate is that Sean genuinely looks for ways to save us money and reduce unnecessary design time. Instead of creating dependency, he helps establish systems that allow our team to handle things internally when appropriate. That kind of transparency says a lot.",
+    name: "Jeff A.",
+    title: "Moka Origins",
+    photo: "/sean-corey-design-client-jeff.webp",
   },
   {
-    quote: "Placeholder testimonial — we had worked with other designers before but the level of craft and communication here was different. Highly recommend.",
-    name: "Client Name",
-    title: "Founder, Company",
-    initials: "CN",
-    placeholder: true,
-  },
-  {
-    quote: "Placeholder testimonial — Sean understood our mission immediately and translated it into something we're proud to show people. The AI-assisted workflow meant we moved faster than expected without sacrificing quality.",
-    name: "Client Name",
-    title: "Owner, Company",
-    initials: "CN",
-    placeholder: true,
-  },
-  {
-    quote: "Placeholder testimonial — straightforward, honest, and delivered exactly what was promised.",
-    name: "Client Name",
-    title: "Co-Founder, Company",
-    initials: "CN",
-    placeholder: true,
+    quote: "Sean brings a rare combination of technical skill, creativity, and professionalism to every project. Clean, modern, highly functional frontend design. Deep understanding of user experience and performance. An invaluable creative and technical partner.",
+    name: "Aaron L.",
+    title: "Himalayan Institute",
+    photo: "/sean-corey-design-client-aaron.webp",
   },
 ];
 
@@ -57,7 +41,15 @@ function Stars() {
   );
 }
 
-function Avatar({ initials }: { initials: string }) {
+function Avatar({ name, photo }: { name: string; photo?: string }) {
+  if (photo) {
+    return (
+      <div className="w-9 h-9 rounded-full flex-shrink-0 overflow-hidden border border-sage/20">
+        <Image src={photo} alt={name} width={36} height={36} className="w-full h-full object-cover" />
+      </div>
+    );
+  }
+  const initials = name.split(" ").map((p) => p[0]).join("").slice(0, 2);
   return (
     <div className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center bg-sage/20 border border-sage/20">
       <span className="font-display font-bold text-[0.65rem] text-sage/70">{initials}</span>
@@ -65,7 +57,7 @@ function Avatar({ initials }: { initials: string }) {
   );
 }
 
-const realReviews = reviews.filter((r) => !r.placeholder);
+const realReviews = reviews;
 
 const STAR_INDICES = [0, 1, 2, 3, 4];
 
@@ -129,7 +121,7 @@ export function Results() {
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
           {reviews.map((review, idx) => (
             <motion.div
-              key={review.name + review.initials + idx}
+              key={review.name + idx}
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
@@ -141,10 +133,10 @@ export function Results() {
                 &ldquo;{review.quote}&rdquo;
               </p>
               <div className="flex items-center gap-3">
-                <Avatar initials={review.initials} />
+                <Avatar name={review.name} photo={review.photo} />
                 <div>
                   <p className="font-display font-semibold text-sage text-[0.95rem] leading-tight">{review.name}</p>
-                  <p className="font-sans text-[0.8rem] text-sage/45 mt-0.5">{review.title}</p>
+                  {review.title && <p className="font-sans text-[0.8rem] text-sage/45 mt-0.5">{review.title}</p>}
                 </div>
               </div>
             </motion.div>

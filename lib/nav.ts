@@ -2,7 +2,7 @@ import type React from "react";
 
 export const NAV_LINKS = [
   { id: "work",    label: "Work"    },
-  // { id: "results", label: "Results" }, // TODO: restore when client reviews are in
+  { id: "results", label: "Results" },
   { id: "process", label: "Process" },
   { id: "about",   label: "About"   },
   { id: "contact", label: "Contact" },
